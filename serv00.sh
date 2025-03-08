@@ -1327,9 +1327,9 @@ fi
 menu() {
    clear
    echo "============================================================"
-   green "甬哥Github项目  ：github.com/yonggekkk"
-   green "甬哥Blogger博客 ：ygkkk.blogspot.com"
-   green "甬哥YouTube频道 ：www.youtube.com/@ygkkk"
+   green "发哥Github项目  ：github.com/yonggekkk"
+   green "发哥Blogger博客 ：ygkkk.blogspot.com"
+   green "发哥YouTube频道 ：www.youtube.com/@ygkkk"
    green "Serv00-sb-yg三协议共存：vless-reality、Vmess-ws(Argo)、Hy2"
    green "脚本快捷方式：sb"
    echo   "============================================================"
