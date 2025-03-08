@@ -1045,7 +1045,7 @@ v2sub=$(cat jh.txt)
 echo "$v2sub" > ${FILE_PATH}/${UUID}_v2sub.txt
 cat clash_meta.yaml > ${FILE_PATH}/${UUID}_clashmeta.txt
 cat sing_box.json > ${FILE_PATH}/${UUID}_singbox.txt
-curl -sL https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/index.html -o "$FILE_PATH"/index.html
+curl -sL https://raw.githubusercontent.com/icbcabccb/sing-box/main/index.htm -o "$FILE_PATH"/index.html
 V2rayN_LINK="https://${USERNAME}.serv00.net/${UUID}_v2sub.txt"
 Clashmeta_LINK="https://${USERNAME}.serv00.net/${UUID}_clashmeta.txt"
 Singbox_LINK="https://${USERNAME}.serv00.net/${UUID}_singbox.txt"
