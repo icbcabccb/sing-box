@@ -222,7 +222,7 @@ uninstall_singbox() {
           #rm rmcron
           purple "************************************************************"
           purple "Serv00-sb-yg卸载完成！"
-          purple "欢迎继续使用脚本：bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/serv00.sh)"
+          purple "欢迎继续使用脚本：bash <(curl -Ls https://raw.githubusercontent.com/icbcabccb/sing-box/main/serv00.sh)"
           purple "************************************************************"
           ;;
         [Nn]) exit 0 ;;
@@ -244,7 +244,7 @@ reading "\n清理所有进程并清空所有安装内容，将退出ssh连接，
     #rm rmcron
     purple "************************************************************"
     purple "Serv00-sb-yg清理重置完成！"
-    purple "欢迎继续使用脚本：bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/serv00.sh)"
+    purple "欢迎继续使用脚本：bash <(curl -Ls https://raw.githubusercontent.com/icbcabccb/sing-box/main/serv00.sh)"
     purple "************************************************************"
     find ~ -type f -exec chmod 644 {} \; 2>/dev/null
     find ~ -type d -exec chmod 755 {} \; 2>/dev/null
@@ -1284,20 +1284,20 @@ if [[ -e $WORKDIR/config.json ]]; then
   COMMAND="sb"
   SCRIPT_PATH="$HOME/bin/$COMMAND"
   mkdir -p "$HOME/bin"
-  curl -Ls https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/serv00.sh > "$SCRIPT_PATH"
+  curl -Ls https://raw.githubusercontent.com/icbcabccb/sing-box/main/serv00.sh > "$SCRIPT_PATH"
   chmod +x "$SCRIPT_PATH"
   if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
       echo "export PATH=\"\$HOME/bin:\$PATH\"" >> "$HOME/.bashrc"
       source "$HOME/.bashrc"
   fi
-curl -sL https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/app.js -o "$keep_path"/app.js
+curl -sL https://raw.githubusercontent.com/icbcabccb/sing-box/main/app.js -o "$keep_path"/app.js
 sed -i '' "15s/name/$snb/g" "$keep_path"/app.js
 sed -i '' "60s/key/$UUID/g" "$keep_path"/app.js
 sed -i '' "75s/name/$USERNAME/g" "$keep_path"/app.js
 sed -i '' "75s/where/$snb/g" "$keep_path"/app.js
-curl -sSL https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/serv00keep.sh -o serv00keep.sh && chmod +x serv00keep.sh
+curl -sSL https://raw.githubusercontent.com/icbcabccb/sing-box/main/serv00keep.sh -o serv00keep.sh && chmod +x serv00keep.sh
 curl -sL https://raw.githubusercontent.com/icbcabccb/sing-box/main/index.html -o "$FILE_PATH"/index.html
-curl -sL https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/sversion | awk -F "更新内容" '{print $1}' | head -n 1 > $WORKDIR/v
+curl -sL https://raw.githubusercontent.com/icbcabccb/sing-box/main/sversion | awk -F "更新内容" '{print $1}' | head -n 1 > $WORKDIR/v
 else
 red "未安装脚本，请选择1进行安装" && exit
 fi
@@ -1388,14 +1388,14 @@ yellow "未设置端口"
 fi
 echo
 insV=$(cat $WORKDIR/v 2>/dev/null)
-latestV=$(curl -sL https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/sversion | awk -F "更新内容" '{print $1}' | head -n 1)
+latestV=$(curl -sL https://raw.githubusercontent.com/icbcabccb/sing-box/main/sversion | awk -F "更新内容" '{print $1}' | head -n 1)
 if [ -f $WORKDIR/v ]; then
 if [ "$insV" = "$latestV" ]; then
 echo -e "当前 Serv00-sb-yg 脚本最新版：${purple}${insV}${re} (已安装)"
 else
 echo -e "当前 Serv00-sb-yg 脚本版本号：${purple}${insV}${re}"
 echo -e "检测到最新 Serv00-sb-yg 脚本版本号：${yellow}${latestV}${re} (可选择4进行更新)"
-echo -e "${yellow}$(curl -sL https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/sversion)${re}"
+echo -e "${yellow}$(curl -sL https://raw.githubusercontent.com/icbcabccb/sing-box/main/sversion)${re}"
 fi
 echo -e "========================================================="
 sbb=$(cat $WORKDIR/sb.txt 2>/dev/null)
@@ -1440,7 +1440,7 @@ else
 echo -e "当前 Serv00-sb-yg 脚本版本号：${purple}${latestV}${re}"
 yellow "未安装 Serv00-sb-yg 脚本！请选择 1 安装"
 fi
-#curl -sSL https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/serv00.sh -o serv00.sh && chmod +x serv00.sh
+#curl -sSL https://raw.githubusercontent.com/icbcabccb/sing-box/main/serv00.sh -o serv00.sh && chmod +x serv00.sh
    echo -e "========================================================="
    reading "请输入选择【0-8】: " choice
    echo
