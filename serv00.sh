@@ -1327,15 +1327,11 @@ fi
 menu() {
    clear
    echo "============================================================"
-   green "发哥Github项目  ：github.com/yonggekkk"
-   green "发哥Blogger博客 ：ygkkk.blogspot.com"
-   green "发哥YouTube频道 ：www.youtube.com/@ygkkk"
-   green "Serv00-sb-yg三协议共存：vless-reality、Vmess-ws(Argo)、Hy2"
    green "脚本快捷方式：sb"
    echo   "============================================================"
-   green  "1. 一键安装 Serv00-sb-yg"
+   green  "1. 一键安装 Serv00-sing-box"
    echo   "------------------------------------------------------------"
-   red    "2. 卸载删除 Serv00-sb-yg"
+   red    "2. 卸载删除 Serv00-sing-box"
    echo   "------------------------------------------------------------"
    green  "3. 重启主进程 (修复节点)"
    echo   "------------------------------------------------------------"
