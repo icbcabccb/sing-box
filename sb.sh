@@ -252,15 +252,15 @@ ymzs(){
 ym_vl_re=www.yahoo.com
 echo
 blue "Vless-reality的SNI域名默认为 www.yahoo.com"
-blue "Vmess-ws将开启TLS，Hysteria-2、Tuic-v5将使用 $(cat /root/ygkkkca/ca.log 2>/dev/null) 证书，并开启SNI证书验证"
+blue "Vmess-ws将开启TLS，Hysteria-2、Tuic-v5将使用 $(cat /root/acmezfml/ca.log 2>/dev/null) 证书，并开启SNI证书验证"
 tlsyn=true
-ym_vm_ws=$(cat /root/ygkkkca/ca.log 2>/dev/null)
-certificatec_vmess_ws='/root/ygkkkca/cert.crt'
-certificatep_vmess_ws='/root/ygkkkca/private.key'
-certificatec_hy2='/root/ygkkkca/cert.crt'
-certificatep_hy2='/root/ygkkkca/private.key'
-certificatec_tuic='/root/ygkkkca/cert.crt'
-certificatep_tuic='/root/ygkkkca/private.key'
+ym_vm_ws=$(cat /root/acmezfml/ca.log 2>/dev/null)
+certificatec_vmess_ws='/root/acmezfml/cert.crt'
+certificatep_vmess_ws='/root/acmezfml/private.key'
+certificatec_hy2='/root/acmezfml/cert.crt'
+certificatep_hy2='/root/acmezfml/private.key'
+certificatec_tuic='/root/acmezfml/cert.crt'
+certificatep_tuic='/root/acmezfml/private.key'
 }
 
 zqzs(){
@@ -291,11 +291,11 @@ else
 red "生成bing自签证书失败" && exit
 fi
 echo
-if [[ -f /root/ygkkkca/cert.crt && -f /root/ygkkkca/private.key && -s /root/ygkkkca/cert.crt && -s /root/ygkkkca/private.key ]]; then
-yellow "经检测，之前已使用Acme-yg脚本申请过Acme域名证书：$(cat /root/ygkkkca/ca.log) "
-green "是否使用 $(cat /root/ygkkkca/ca.log) 域名证书？"
+if [[ -f /root/acmezfml/cert.crt && -f /root/acmezfml/private.key && -s /root/acmezfml/cert.crt && -s /root/acmezfml/private.key ]]; then
+yellow "经检测，之前已使用Acme-yg脚本申请过Acme域名证书：$(cat /root/acmezfml/ca.log) "
+green "是否使用 $(cat /root/acmezfml/ca.log) 域名证书？"
 yellow "1：否！使用自签的证书 (回车默认)"
-yellow "2：是！使用 $(cat /root/ygkkkca/ca.log) 域名证书"
+yellow "2：是！使用 $(cat /root/acmezfml/ca.log) 域名证书"
 readp "请选择【1-2】：" menu
 if [ -z "$menu" ] || [ "$menu" = "1" ] ; then
 zqzs
@@ -311,7 +311,7 @@ if [ -z "$menu" ] || [ "$menu" = "1" ] ; then
 zqzs
 else
 bash <(curl -Ls https://gitlab.com/rwkgyg/acme-script/raw/main/acme.sh)
-if [[ ! -f /root/ygkkkca/cert.crt && ! -f /root/ygkkkca/private.key && ! -s /root/ygkkkca/cert.crt && ! -s /root/ygkkkca/private.key ]]; then
+if [[ ! -f /root/acmezfml/cert.crt && ! -f /root/acmezfml/private.key && ! -s /root/acmezfml/cert.crt && ! -s /root/acmezfml/private.key ]]; then
 red "Acme证书申请失败，继续使用自签证书" 
 zqzs
 else
@@ -934,9 +934,9 @@ fi
 }
 
 result_vl_vm_hy_tu(){
-if [[ -f /root/ygkkkca/cert.crt && -f /root/ygkkkca/private.key && -s /root/ygkkkca/cert.crt && -s /root/ygkkkca/private.key ]]; then
+if [[ -f /root/acmezfml/cert.crt && -f /root/acmezfml/private.key && -s /root/acmezfml/cert.crt && -s /root/acmezfml/private.key ]]; then
 ym=`bash ~/.acme.sh/acme.sh --list | tail -1 | awk '{print $1}'`
-echo $ym > /root/ygkkkca/ca.log
+echo $ym > /root/acmezfml/ca.log
 fi
 rm -rf /etc/s-box/vm_ws_argo.txt /etc/s-box/vm_ws.txt /etc/s-box/vm_ws_tls.txt
 wgcfgo
@@ -991,7 +991,7 @@ hyps=$hy2_port,$hy2ports
 else
 hyps=
 fi
-ym=$(cat /root/ygkkkca/ca.log 2>/dev/null)
+ym=$(cat /root/acmezfml/ca.log 2>/dev/null)
 hy2_sniname=$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[2].tls.key_path')
 if [[ "$hy2_sniname" = '/etc/s-box/private.key' ]]; then
 hy2_name=www.bing.com
@@ -1007,7 +1007,7 @@ ins_hy2=0
 hy2_ins=false
 fi
 tu5_port=$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[3].listen_port')
-ym=$(cat /root/ygkkkca/ca.log 2>/dev/null)
+ym=$(cat /root/acmezfml/ca.log 2>/dev/null)
 tu5_sniname=$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[3].tls.key_path')
 if [[ "$tu5_sniname" = '/etc/s-box/private.key' ]]; then
 tu5_name=www.bing.com
@@ -3395,18 +3395,18 @@ echo
 }
 
 changeym(){
-[ -f /root/ygkkkca/ca.log ] && ymzs="$yellow切换为域名证书：$(cat /root/ygkkkca/ca.log 2>/dev/null)$plain" || ymzs="$yellow未申请域名证书，无法切换$plain"
+[ -f /root/acmezfml/ca.log ] && ymzs="$yellow切换为域名证书：$(cat /root/acmezfml/ca.log 2>/dev/null)$plain" || ymzs="$yellow未申请域名证书，无法切换$plain"
 vl_na="正在使用的域名：$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[0].tls.server_name')。$yellow更换符合reality要求的域名，不支持证书域名$plain"
 tls=$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[1].tls.enabled')
-[[ "$tls" = "false" ]] && vm_na="当前已关闭TLS。$ymzs ${yellow}将开启TLS，Argo隧道将不支持开启${plain}" || vm_na="正在使用的域名证书：$(cat /root/ygkkkca/ca.log 2>/dev/null)。$yellow切换为关闭TLS，Argo隧道将可用$plain"
+[[ "$tls" = "false" ]] && vm_na="当前已关闭TLS。$ymzs ${yellow}将开启TLS，Argo隧道将不支持开启${plain}" || vm_na="正在使用的域名证书：$(cat /root/acmezfml/ca.log 2>/dev/null)。$yellow切换为关闭TLS，Argo隧道将可用$plain"
 hy2_sniname=$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[2].tls.key_path')
-[[ "$hy2_sniname" = '/etc/s-box/private.key' ]] && hy2_na="正在使用自签bing证书。$ymzs" || hy2_na="正在使用的域名证书：$(cat /root/ygkkkca/ca.log 2>/dev/null)。$yellow切换为自签bing证书$plain"
+[[ "$hy2_sniname" = '/etc/s-box/private.key' ]] && hy2_na="正在使用自签bing证书。$ymzs" || hy2_na="正在使用的域名证书：$(cat /root/acmezfml/ca.log 2>/dev/null)。$yellow切换为自签bing证书$plain"
 tu5_sniname=$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[3].tls.key_path')
-[[ "$tu5_sniname" = '/etc/s-box/private.key' ]] && tu5_na="正在使用自签bing证书。$ymzs" || tu5_na="正在使用的域名证书：$(cat /root/ygkkkca/ca.log 2>/dev/null)。$yellow切换为自签bing证书$plain"
+[[ "$tu5_sniname" = '/etc/s-box/private.key' ]] && tu5_na="正在使用自签bing证书。$ymzs" || tu5_na="正在使用的域名证书：$(cat /root/acmezfml/ca.log 2>/dev/null)。$yellow切换为自签bing证书$plain"
 echo
 green "请选择要切换证书模式的协议"
 green "1：vless-reality协议，$vl_na"
-if [[ -f /root/ygkkkca/ca.log ]]; then
+if [[ -f /root/acmezfml/ca.log ]]; then
 green "2：vmess-ws协议，$vm_na"
 green "3：Hysteria2协议，$hy2_na"
 green "4：Tuic5协议，$tu5_na"
@@ -3426,16 +3426,16 @@ echo $sbfiles | xargs -n1 sed -i "27s/$b/$ym_vl_re/"
 restartsb
 blue "设置完毕，请回到主菜单进入选项9更新节点配置"
 elif [ "$menu" = "2" ]; then
-if [ -f /root/ygkkkca/ca.log ]; then
+if [ -f /root/acmezfml/ca.log ]; then
 a=$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[1].tls.enabled')
 [ "$a" = "true" ] && a_a=false || a_a=true
 b=$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[1].tls.server_name')
-[ "$b" = "www.bing.com" ] && b_b=$(cat /root/ygkkkca/ca.log) || b_b=$(cat /root/ygkkkca/ca.log)
+[ "$b" = "www.bing.com" ] && b_b=$(cat /root/acmezfml/ca.log) || b_b=$(cat /root/acmezfml/ca.log)
 c=$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[1].tls.certificate_path')
 d=$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[1].tls.key_path')
 if [ "$d" = '/etc/s-box/private.key' ]; then
-c_c='/root/ygkkkca/cert.crt'
-d_d='/root/ygkkkca/private.key'
+c_c='/root/acmezfml/cert.crt'
+d_d='/root/acmezfml/private.key'
 else
 c_c='/etc/s-box/cert.pem'
 d_d='/etc/s-box/private.key'
@@ -3456,12 +3456,12 @@ else
 red "当前未申请域名证书，不可切换。主菜单选择12，执行Acme证书申请" && sleep 2 && sb
 fi
 elif [ "$menu" = "3" ]; then
-if [ -f /root/ygkkkca/ca.log ]; then
+if [ -f /root/acmezfml/ca.log ]; then
 c=$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[2].tls.certificate_path')
 d=$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[2].tls.key_path')
 if [ "$d" = '/etc/s-box/private.key' ]; then
-c_c='/root/ygkkkca/cert.crt'
-d_d='/root/ygkkkca/private.key'
+c_c='/root/acmezfml/cert.crt'
+d_d='/root/acmezfml/private.key'
 else
 c_c='/etc/s-box/cert.pem'
 d_d='/etc/s-box/private.key'
@@ -3474,12 +3474,12 @@ else
 red "当前未申请域名证书，不可切换。主菜单选择12，执行Acme证书申请" && sleep 2 && sb
 fi
 elif [ "$menu" = "4" ]; then
-if [ -f /root/ygkkkca/ca.log ]; then
+if [ -f /root/acmezfml/ca.log ]; then
 c=$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[3].tls.certificate_path')
 d=$(sed 's://.*::g' /etc/s-box/sb.json | jq -r '.inbounds[3].tls.key_path')
 if [ "$d" = '/etc/s-box/private.key' ]; then
-c_c='/root/ygkkkca/cert.crt'
-d_d='/root/ygkkkca/private.key'
+c_c='/root/acmezfml/cert.crt'
+d_d='/root/acmezfml/private.key'
 else
 c_c='/etc/s-box/cert.pem'
 d_d='/etc/s-box/private.key'
