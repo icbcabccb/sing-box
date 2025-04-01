@@ -73,7 +73,7 @@ else
 echo "$UUID" > $WORKDIR/UUID.txt
 UUID=$(cat "$WORKDIR/UUID.txt" 2>/dev/null)
 fi
-curl -sL https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/app.js -o "$keep_path"/app.js
+curl -sL https://raw.githubusercontent.com/icbcabccb/sing-box/main/app.js -o "$keep_path"/app.js
 sed -i '' "15s/name/$snb/g" "$keep_path"/app.js
 sed -i '' "59s/key/$UUID/g" "$keep_path"/app.js
 sed -i '' "75s/name/$USERNAME/g" "$keep_path"/app.js
@@ -245,7 +245,7 @@ get_argodomain() {
 }
 
 if [ ! -f serv00keep.sh ]; then
-curl -sSL https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/serv00keep.sh -o serv00keep.sh && chmod +x serv00keep.sh
+curl -sSL https://raw.githubusercontent.com/icbcabccb/sing-box/main/serv00keep.sh -o serv00keep.sh && chmod +x serv00keep.sh
 echo '#!/bin/bash
 red() { echo -e "\e[1;91m$1\033[0m"; }
 green() { echo -e "\e[1;32m$1\033[0m"; }
@@ -328,7 +328,7 @@ check_port
 fi
 if [ ! -s sb.txt ] && [ ! -s ag.txt ]; then
 DOWNLOAD_DIR="." && mkdir -p "$DOWNLOAD_DIR" && FILE_INFO=()
-FILE_INFO=("https://github.com/yonggekkk/Cloudflare_vless_trojan/releases/download/serv00/sb web" "https://github.com/yonggekkk/Cloudflare_vless_trojan/releases/download/serv00/server bot")
+FILE_INFO=("https://github.com/icbcabccb/Cloudflare_vless_trojan/releases/download/serv00/sb web" "https://github.com/icbcabccb/Cloudflare_vless_trojan/releases/download/serv00/server bot")
 declare -A FILE_MAP
 generate_random_name() {
     local chars=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
@@ -1158,7 +1158,7 @@ v2sub=$(cat jh.txt)
 echo "$v2sub" > ${FILE_PATH}/${UUID}_v2sub.txt
 cat clash_meta.yaml > ${FILE_PATH}/${UUID}_clashmeta.txt
 cat sing_box.json > ${FILE_PATH}/${UUID}_singbox.txt
-curl -sL https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/index.html -o "$FILE_PATH"/index.html
+curl -sL https://raw.githubusercontent.com/icbcabccb/sing-box/main/index.html -o "$FILE_PATH"/index.html
 V2rayN_LINK="https://${USERNAME}.serv00.net/${UUID}_v2sub.txt"
 Clashmeta_LINK="https://${USERNAME}.serv00.net/${UUID}_clashmeta.txt"
 Singbox_LINK="https://${USERNAME}.serv00.net/${UUID}_singbox.txt"
@@ -1190,7 +1190,7 @@ Argo域名：${argodomain}
 $vl_link
 
 注意：如果之前输入的reality域名为CF域名，将激活以下功能：
-可应用在 https://github.com/yonggekkk/Cloudflare_vless_trojan 项目中创建CF vless/trojan 节点
+可应用在 https://github.com/icbcabccb/Cloudflare_vless_trojan 项目中创建CF vless/trojan 节点
 1、Proxyip(带端口)信息如下：
 方式一全局应用：设置变量名：proxyip    设置变量值：$IP:$vless_port  
 方式二单节点应用：path路径改为：/pyip=$IP:$vless_port
