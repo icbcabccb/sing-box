@@ -68,7 +68,7 @@ fi
 hostname=$(hostname)
 
 if [ ! -f sbyg_update ]; then
-green "首次安装Sing-box-yg脚本必要的依赖……"
+green "首次安装Sing-box脚本必要的依赖……"
 if [[ x"${release}" == x"alpine" ]]; then
 apk update
 apk add wget curl tar jq tzdata openssl expect git socat iproute2 iptables
@@ -292,7 +292,7 @@ red "生成bing自签证书失败" && exit
 fi
 echo
 if [[ -f /root/acmezfml/cert.crt && -f /root/acmezfml/private.key && -s /root/acmezfml/cert.crt && -s /root/acmezfml/private.key ]]; then
-yellow "经检测，之前已使用Acme-yg脚本申请过Acme域名证书：$(cat /root/acmezfml/ca.log) "
+yellow "经检测，之前已使用Acme脚本申请过Acme域名证书：$(cat /root/acmezfml/ca.log) "
 green "是否使用 $(cat /root/acmezfml/ca.log) 域名证书？"
 yellow "1：否！使用自签的证书 (回车默认)"
 yellow "2：是！使用 $(cat /root/acmezfml/ca.log) 域名证书"
@@ -305,7 +305,7 @@ fi
 else
 green "如果你有解析完成的域名，是否申请一个Acme域名证书？"
 yellow "1：否！继续使用自签的证书 (回车默认)"
-yellow "2：是！使用Acme-yg脚本申请Acme证书 (支持常规80端口模式与Dns API模式)"
+yellow "2：是！使用Acme脚本申请Acme证书 (支持常规80端口模式与Dns API模式)"
 readp "请选择【1-2】：" menu
 if [ -z "$menu" ] || [ "$menu" = "1" ] ; then
 zqzs
@@ -3260,7 +3260,7 @@ aarch64) cpu=arm64;;
 x86_64) cpu=amd64;;
 esac
 curl -L -o /etc/s-box/cloudflared -# --retry 2 https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-$cpu
-#curl -L -o /etc/s-box/cloudflared -# --retry 2 https://gitlab.com/rwkgyg/sing-box-yg/-/raw/main/$cpu
+#curl -L -o /etc/s-box/cloudflared -# --retry 2 https://gitlab.com/rwkgyg/Sing-box/-/raw/main/$cpu
 chmod +x /etc/s-box/cloudflared
 fi
 }
@@ -3382,11 +3382,11 @@ warpwg
 inssbjsonser
 sbservice
 sbactive
-#curl -sL https://gitlab.com/rwkgyg/sing-box-yg/-/raw/main/version/version | awk -F "更新内容" '{print $1}' | head -n 1 > /etc/s-box/v
+#curl -sL https://gitlab.com/rwkgyg/Sing-box/-/raw/main/version/version | awk -F "更新内容" '{print $1}' | head -n 1 > /etc/s-box/v
 curl -sL https://raw.githubusercontent.com/icbcabccb/sing-box/main/version | awk -F "更新内容" '{print $1}' | head -n 1 > /etc/s-box/v
 clear
 red "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-lnsb && blue "Sing-box-yg脚本安装成功，脚本快捷方式：sb" && cronsb && sleep 1
+lnsb && blue "Sing-box脚本安装成功，脚本快捷方式：sb" && cronsb && sleep 1
 sbshare
 red "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 blue "Hysteria2/Tuic5自定义V2rayN配置、Clash-Meta/Sing-box客户端配置及私有订阅链接，请选择9查看"
@@ -4583,11 +4583,11 @@ chmod +x /usr/bin/sb
 
 upsbyg(){
 if [[ ! -f '/usr/bin/sb' ]]; then
-red "未正常安装Sing-box-yg" && exit
+red "未正常安装Sing-box" && exit
 fi
 lnsb
 curl -sL https://raw.githubusercontent.com/icbcabccb/sing-box/main/version | awk -F "更新内容" '{print $1}' | head -n 1 > /etc/s-box/v
-green "Sing-box-yg安装脚本升级成功" && sleep 5 && sb
+green "Sing-box安装脚本升级成功" && sleep 5 && sb
 }
 
 lapre(){
@@ -4665,7 +4665,7 @@ iptables -t nat -F PREROUTING >/dev/null 2>&1
 netfilter-persistent save >/dev/null 2>&1
 service iptables save >/dev/null 2>&1
 green "Sing-box卸载完成！"
-blue "欢迎继续使用Sing-box-yg脚本：bash <(curl -Ls https://raw.githubusercontent.com/icbcabccb/sing-box/main/sb.sh)"
+blue "欢迎继续使用Sing-box脚本：bash <(curl -Ls https://raw.githubusercontent.com/icbcabccb/sing-box/main/sb.sh)"
 echo
 }
 
@@ -5036,7 +5036,7 @@ green " 3. 变更配置 【双证书TLS/UUID路径/Argo/IP优先/TG通知/Warp/�
 green " 4. 更改主端口/添加多端口跳跃复用" 
 green " 5. 三通道域名分流"
 green " 6. 关闭/重启 Sing-box"   
-green " 7. 更新 Sing-box-yg 脚本"
+green " 7. 更新 Sing-box 脚本"
 green " 8. 更新/切换/指定 Sing-box 内核版本"
 white "----------------------------------------------------------------------------------"
 green " 9. 刷新并查看节点 【Clash-Meta/SFA+SFI+SFW三合一配置/订阅链接/推送TG通知】"
@@ -5051,15 +5051,15 @@ insV=$(cat /etc/s-box/v 2>/dev/null)
 latestV=$(curl -sL https://raw.githubusercontent.com/icbcabccb/sing-box/main/version | awk -F "更新内容" '{print $1}' | head -n 1)
 if [ -f /etc/s-box/v ]; then
 if [ "$insV" = "$latestV" ]; then
-echo -e "当前 Sing-box-yg 脚本最新版：${bblue}${insV}${plain} (已安装)"
+echo -e "当前 Sing-box 脚本最新版：${bblue}${insV}${plain} (已安装)"
 else
-echo -e "当前 Sing-box-yg 脚本版本号：${bblue}${insV}${plain}"
-echo -e "检测到最新 Sing-box-yg 脚本版本号：${yellow}${latestV}${plain} (可选择7进行更新)"
+echo -e "当前 Sing-box 脚本版本号：${bblue}${insV}${plain}"
+echo -e "检测到最新 Sing-box 脚本版本号：${yellow}${latestV}${plain} (可选择7进行更新)"
 echo -e "${yellow}$(curl -sL https://raw.githubusercontent.com/icbcabccb/sing-box/main/version)${plain}"
 fi
 else
-echo -e "当前 Sing-box-yg 脚本版本号：${bblue}${latestV}${plain}"
-yellow "未安装 Sing-box-yg 脚本！请先选择 1 安装"
+echo -e "当前 Sing-box 脚本版本号：${bblue}${latestV}${plain}"
+yellow "未安装 Sing-box脚本！请先选择 1 安装"
 fi
 
 lapre
